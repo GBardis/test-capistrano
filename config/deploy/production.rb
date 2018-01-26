@@ -5,10 +5,12 @@
 
 # server "example.com", user: "deploy", roles: %w{app db web}, my_property: :my_value
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
-# server "db.example.com", user: "deploy", roles: %w{db}
+# server 'root@46.101.147.14' # , user: 'deployer', roles: %w[db]
+require 'bundler/capistrano'
 
+server '46.101.147.14', :web, :app, :db, primary: true
 
-
+# server 'roor@46.101.147.14', primary: true
 # role-based syntax
 # ==================
 
@@ -16,12 +18,10 @@
 # group is considered to be the first unless any hosts have the primary
 # property set. Specify the username and a domain or IP for the server.
 # Don't use `:all`, it's a meta role.
-
- role :app, %w{deployer@46.101.147.14}#, my_property: :my_value
- role :web, %w{deployer@46.101.147.14}#, other_property: :other_value
- role :db,  %w{deployer@46.101.147.14}
-
-
+#
+# role :app, %w[root@46.101.147.14] # , my_property: :my_value
+# role :web, %w[root@46.101.147.14] # , other_property: :other_value
+# role :db,  %w[root@46.101.147.14]
 
 # Configuration
 # =============
@@ -31,8 +31,6 @@
 # http://capistranorb.com/documentation/getting-started/configuration/
 # Feel free to add new variables to customise your setup.
 
-
-
 # Custom SSH Options
 # ==================
 # You may pass any option but keep in mind that net/ssh understands a
@@ -41,11 +39,9 @@
 #
 # Global options
 # --------------
-  set :ssh_options, {
-    keys: %w(/home/gdev-lap/.ssh/id_rsa),
-    forward_agent: false,
-    auth_methods: %w(password)
-  }
+# set :ssh_options, keys: %w[/home/gdev-lap/.ssh/id_rsa],
+#                   forward_agent: false,
+#                   auth_methods: %w[trelos777]
 #
 # The server-based syntax can be used to override options:
 # ------------------------------------
